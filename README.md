@@ -34,6 +34,15 @@ a popup window. E.g. `bind -n C-Up run-shell "tmuxp-popup -t popup"`
 
 Display version and exit.
 
+# Detach on destroy
+
+If you want the popup to close if you destroy the session, then set `detact-on-destory`
+to `on` for the session. E.g.
+
+    session_name: popup
+    options:
+      detach-on-destroy: on
+
 # Homepage
 
 https://github.com/von/tmuxp-popup
