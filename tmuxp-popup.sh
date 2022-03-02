@@ -109,9 +109,13 @@ if test "${_TOGGLE}" = true ; then
   fi
 fi
 
-_TMUXP_CONFIG=${_TMUXP_CONFIG:-${_SESSION}}
-debug "Loading session ${_SESSION} from config file ${_TMUXP_CONFIG}"
-"${_TMUXP}" load -d "${_TMUXP_CONFIG}" > /dev/null
+if tmux has-session -t "${_SESSION}" ; then
+  debug "Session ${_SESSION} exists."
+else
+  _TMUXP_CONFIG=${_TMUXP_CONFIG:-${_SESSION}}
+  debug "Loading session ${_SESSION} from config file ${_TMUXP_CONFIG}"
+  "${_TMUXP}" load -d "${_TMUXP_CONFIG}" > /dev/null
+fi
 
 debug "Attaching to session ${_SESSION}..."
 # "no previous window" error message - see https://github.com/tmux-python/tmuxp/issues/364
