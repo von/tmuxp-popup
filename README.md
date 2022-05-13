@@ -43,6 +43,15 @@ to `on` for the session. E.g.
     options:
       detach-on-destroy: on
 
+# Copying to system pastebuffer on Mac
+
+While recent versions of tmux seem to copy to the OSX pastebuffer without help
+(e.g. `reattach-to-user-namespace`) it seems that within a nested tmux session
+`copy-selection` won't result in the selection being in the system pastebuffer.
+To work around this, use something like the following:
+
+    bind -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "pbcopy"
+
 # Homepage
 
 https://github.com/von/tmuxp-popup
